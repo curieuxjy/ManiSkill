@@ -22,7 +22,7 @@ NUM_ENVS=${2:-64}
 TOTAL_TIMESTEPS=${3:-2000000}
 WANDB_ENABLED=${WANDB:-1}
 
-ENV_ID="RotateSingleObjectInHandLevel${LEVEL}-v1"
+ENV_ID="AllegroRotateLevel${LEVEL}-v1"
 EXP_NAME="allegro_sac_level${LEVEL}_$(date +%Y%m%d_%H%M%S)"
 
 WANDB_ARGS=""
@@ -42,8 +42,8 @@ echo ""
 cd "${STUDY_DIR}"
 export WANDB_DIR="${STUDY_DIR}"
 
-# 원본 sac.py에 eval_metrics KeyError 버그가 있어 패치 래퍼 사용
-python "${STUDY_DIR}/scripts/patch_sac.py" \
+# run_with_patch.py가 env partial reset 버그 + sac eval_metrics KeyError 버그를 모두 패치
+python "${STUDY_DIR}/scripts/run_with_patch.py" "${PROJECT_ROOT}/examples/baselines/sac/sac.py" \
     --env_id="${ENV_ID}" \
     --exp_name="${EXP_NAME}" \
     --num_envs=${NUM_ENVS} \

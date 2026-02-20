@@ -22,6 +22,7 @@ TAG=$(date +%Y%m%d_%H%M%S)
 cd "${STUDY_DIR}"
 export WANDB_DIR="${STUDY_DIR}"
 
+PATCH="${STUDY_DIR}/scripts/run_with_patch.py"
 PPO_SCRIPT="${PROJECT_ROOT}/examples/baselines/ppo/ppo.py"
 
 # ──────────────────────────────────────────────
@@ -29,12 +30,12 @@ PPO_SCRIPT="${PROJECT_ROOT}/examples/baselines/ppo/ppo.py"
 # ──────────────────────────────────────────────
 EXP_L0="allegro_curriculum_level0_${TAG}"
 echo "=== Level 0 학습 시작 ==="
-python "${PPO_SCRIPT}" \
-    --env_id="RotateSingleObjectInHandLevel0-v1" \
+python "${PATCH}" "${PPO_SCRIPT}" \
+    --env_id="AllegroRotateLevel0-v1" \
     --exp_name="${EXP_L0}" \
     --num_envs=${NUM_ENVS} --num_steps=50 \
     --update_epochs=8 --num_minibatches=32 \
-    --total_timesteps=5000000 --eval_freq=25 \
+    --total_timesteps=50000000 --eval_freq=25 \
     --gamma=0.8 --gae_lambda=0.9 --learning_rate=3e-4 \
     --control_mode="pd_joint_delta_pos" \
     --save_model --capture_video --track
@@ -48,13 +49,13 @@ echo "Level 0 완료 → ${STUDY_DIR}/${CKPT_L0}"
 EXP_L1="allegro_curriculum_level1_${TAG}"
 echo ""
 echo "=== Level 1 학습 시작 (from Level 0 checkpoint) ==="
-python "${PPO_SCRIPT}" \
-    --env_id="RotateSingleObjectInHandLevel1-v1" \
+python "${PATCH}" "${PPO_SCRIPT}" \
+    --env_id="AllegroRotateLevel1-v1" \
     --exp_name="${EXP_L1}" \
     --checkpoint="${CKPT_L0}" \
     --num_envs=${NUM_ENVS} --num_steps=50 \
     --update_epochs=8 --num_minibatches=32 \
-    --total_timesteps=10000000 --eval_freq=25 \
+    --total_timesteps=100000000 --eval_freq=25 \
     --gamma=0.8 --gae_lambda=0.9 --learning_rate=1e-4 \
     --control_mode="pd_joint_delta_pos" \
     --save_model --capture_video --track
@@ -68,13 +69,13 @@ echo "Level 1 완료 → ${STUDY_DIR}/${CKPT_L1}"
 EXP_L2="allegro_curriculum_level2_${TAG}"
 echo ""
 echo "=== Level 2 학습 시작 (from Level 1 checkpoint) ==="
-python "${PPO_SCRIPT}" \
-    --env_id="RotateSingleObjectInHandLevel2-v1" \
+python "${PATCH}" "${PPO_SCRIPT}" \
+    --env_id="AllegroRotateLevel2-v1" \
     --exp_name="${EXP_L2}" \
     --checkpoint="${CKPT_L1}" \
     --num_envs=${NUM_ENVS} --num_steps=50 \
     --update_epochs=8 --num_minibatches=32 \
-    --total_timesteps=10000000 --eval_freq=25 \
+    --total_timesteps=100000000 --eval_freq=25 \
     --gamma=0.8 --gae_lambda=0.9 --learning_rate=1e-4 \
     --control_mode="pd_joint_delta_pos" \
     --save_model --capture_video --track
@@ -88,13 +89,13 @@ echo "Level 2 완료 → ${STUDY_DIR}/${CKPT_L2}"
 EXP_L3="allegro_curriculum_level3_${TAG}"
 echo ""
 echo "=== Level 3 학습 시작 (from Level 2 checkpoint) ==="
-python "${PPO_SCRIPT}" \
-    --env_id="RotateSingleObjectInHandLevel3-v1" \
+python "${PATCH}" "${PPO_SCRIPT}" \
+    --env_id="AllegroRotateLevel3-v1" \
     --exp_name="${EXP_L3}" \
     --checkpoint="${CKPT_L2}" \
     --num_envs=${NUM_ENVS} --num_steps=50 \
     --update_epochs=8 --num_minibatches=32 \
-    --total_timesteps=15000000 --eval_freq=25 \
+    --total_timesteps=1500000000 --eval_freq=25 \
     --gamma=0.8 --gae_lambda=0.9 --learning_rate=5e-5 \
     --control_mode="pd_joint_delta_pos" \
     --save_model --capture_video --track

@@ -19,7 +19,7 @@ ALGO=${1:?"Usage: $0 <ppo|sac> <checkpoint_path> [level]"}
 CHECKPOINT=${2:?"Usage: $0 <ppo|sac> <checkpoint_path> [level]"}
 LEVEL=${3:-0}
 
-ENV_ID="RotateSingleObjectInHandLevel${LEVEL}-v1"
+ENV_ID="AllegroRotateLevel${LEVEL}-v1"
 
 echo "=== Evaluating Allegro Hand (${ALGO}) ==="
 echo "  Env: ${ENV_ID}"
@@ -29,8 +29,10 @@ echo ""
 # study_allegro/ 하위에서 실행 (eval 비디오도 여기에 저장)
 cd "${STUDY_DIR}"
 
+PATCH="${STUDY_DIR}/scripts/run_with_patch.py"
+
 if [ "${ALGO}" = "ppo" ]; then
-    python "${PROJECT_ROOT}/examples/baselines/ppo/ppo.py" \
+    python "${PATCH}" "${PROJECT_ROOT}/examples/baselines/ppo/ppo.py" \
         --env_id="${ENV_ID}" \
         --evaluate \
         --checkpoint="${CHECKPOINT}" \
@@ -40,8 +42,7 @@ if [ "${ALGO}" = "ppo" ]; then
         --capture_video
 
 elif [ "${ALGO}" = "sac" ]; then
-    # SAC 원본에 eval_metrics KeyError 버그가 있어 패치 래퍼 사용
-    python "${STUDY_DIR}/scripts/patch_sac.py" \
+    python "${PATCH}" "${PROJECT_ROOT}/examples/baselines/sac/sac.py" \
         --env_id="${ENV_ID}" \
         --evaluate \
         --checkpoint="${CHECKPOINT}" \

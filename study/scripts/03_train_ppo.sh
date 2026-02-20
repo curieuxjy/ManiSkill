@@ -23,7 +23,7 @@ NUM_ENVS=${2:-256}
 TOTAL_TIMESTEPS=${3:-5000000}
 WANDB_ENABLED=${WANDB:-1}
 
-ENV_ID="RotateSingleObjectInHandLevel${LEVEL}-v1"
+ENV_ID="AllegroRotateLevel${LEVEL}-v1"
 EXP_NAME="allegro_ppo_level${LEVEL}_$(date +%Y%m%d_%H%M%S)"
 
 WANDB_ARGS=""
@@ -44,7 +44,7 @@ echo ""
 cd "${STUDY_DIR}"
 export WANDB_DIR="${STUDY_DIR}"
 
-python "${PROJECT_ROOT}/examples/baselines/ppo/ppo.py" \
+python "${STUDY_DIR}/scripts/run_with_patch.py" "${PROJECT_ROOT}/examples/baselines/ppo/ppo.py" \
     --env_id="${ENV_ID}" \
     --exp_name="${EXP_NAME}" \
     --num_envs=${NUM_ENVS} \
