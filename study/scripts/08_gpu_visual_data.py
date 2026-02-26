@@ -10,10 +10,10 @@ ManiSkill3의 핵심 기능 중 하나: GPU에서 수백~수천 개 환경의 RG
   4. 수집한 비주얼 데이터를 이미지로 저장하는 방법
 
 사용법:
-  python study_allegro/scripts/08_gpu_visual_data.py                      # 전체 실행
-  python study_allegro/scripts/08_gpu_visual_data.py --section explore     # obs_mode별 데이터 구조 탐색
-  python study_allegro/scripts/08_gpu_visual_data.py --section benchmark   # FPS 벤치마크
-  python study_allegro/scripts/08_gpu_visual_data.py --section save        # 샘플 이미지 저장
+  python study/scripts/08_gpu_visual_data.py                      # 전체 실행
+  python study/scripts/08_gpu_visual_data.py --section explore     # obs_mode별 데이터 구조 탐색
+  python study/scripts/08_gpu_visual_data.py --section benchmark   # FPS 벤치마크
+  python study/scripts/08_gpu_visual_data.py --section save        # 샘플 이미지 저장
 """
 
 import argparse
@@ -185,7 +185,7 @@ def save_visual_samples():
     for _ in range(30):
         obs, _, _, _, _ = env.step(env.action_space.sample())
 
-    out_dir = "study_allegro/videos/visual_samples"
+    out_dir = "study/videos/visual_samples"
     os.makedirs(out_dir, exist_ok=True)
 
     # 카메라 이름 목록

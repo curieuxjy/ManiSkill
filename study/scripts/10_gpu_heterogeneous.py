@@ -11,11 +11,11 @@ ManiSkill3의 고급 기능: 각 병렬 환경이 완전히 다른 물체/씬을
   5. 이종 환경에서의 학습과 일반화
 
 사용법:
-  python study_allegro/scripts/10_gpu_heterogeneous.py                         # 전체
-  python study_allegro/scripts/10_gpu_heterogeneous.py --section scene_idx     # set_scene_idxs 원리
-  python study_allegro/scripts/10_gpu_heterogeneous.py --section merge         # Actor.merge 구조
-  python study_allegro/scripts/10_gpu_heterogeneous.py --section hetero_env    # 이종 환경 실제 예시
-  python study_allegro/scripts/10_gpu_heterogeneous.py --section reconfig      # reconfiguration_freq
+  python study/scripts/10_gpu_heterogeneous.py                         # 전체
+  python study/scripts/10_gpu_heterogeneous.py --section scene_idx     # set_scene_idxs 원리
+  python study/scripts/10_gpu_heterogeneous.py --section merge         # Actor.merge 구조
+  python study/scripts/10_gpu_heterogeneous.py --section hetero_env    # 이종 환경 실제 예시
+  python study/scripts/10_gpu_heterogeneous.py --section reconfig      # reconfiguration_freq
 """
 
 import argparse

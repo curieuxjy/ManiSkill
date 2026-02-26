@@ -1,6 +1,6 @@
 """커스텀 환경을 등록한 뒤 대상 스크립트를 실행하는 래퍼.
 
-메인 소스를 수정하지 않고, study_allegro/envs/에 정의된 커스텀 환경을
+메인 소스를 수정하지 않고, study/envs/에 정의된 커스텀 환경을
 gym에 등록한 뒤 원본 학습 스크립트를 실행한다.
 
 등록되는 환경:
@@ -11,10 +11,10 @@ gym에 등록한 뒤 원본 학습 스크립트를 실행한다.
   - sac.py 대상일 경우 eval_metrics KeyError 수정
 
 사용법:
-  python study_allegro/scripts/run_with_patch.py <script.py> [args...]
+  python study/scripts/run_with_patch.py <script.py> [args...]
 
 예시:
-  python study_allegro/scripts/run_with_patch.py examples/baselines/ppo/ppo.py \\
+  python study/scripts/run_with_patch.py examples/baselines/ppo/ppo.py \\
       --env_id=AllegroRotateLevel0-v1 --num_envs=512 ...
 """
 
@@ -33,7 +33,7 @@ original = target_script.read_text()
 
 # 1. 커스텀 환경 등록 코드를 주입 (import mani_skill.envs 직후)
 env_register_inject = (
-    f'\n# --- study_allegro custom envs ---\n'
+    f'\n# --- study custom envs ---\n'
     f'exec(open(r"{CUSTOM_ENV_PATH}").read())\n'
     f'# --- end custom envs ---\n'
 )

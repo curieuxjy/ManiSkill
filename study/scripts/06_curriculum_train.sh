@@ -4,13 +4,13 @@
 # 낮은 레벨에서 학습한 모델을 다음 레벨의 초기 가중치로 사용합니다.
 #
 # 사용법:
-#   bash study_allegro/scripts/06_curriculum_train.sh
+#   bash study/scripts/06_curriculum_train.sh
 #
 # 각 레벨의 timestep과 num_envs는 필요에 따라 아래에서 조정하세요.
 
 set -e
 
-# 프로젝트 루트와 study_allegro 디렉토리 경로 설정
+# 프로젝트 루트와 study 디렉토리 경로 설정
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 STUDY_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_ROOT="$(cd "$STUDY_DIR/.." && pwd)"
@@ -18,7 +18,7 @@ PROJECT_ROOT="$(cd "$STUDY_DIR/.." && pwd)"
 NUM_ENVS=1024
 TAG=$(date +%Y%m%d_%H%M%S)
 
-# study_allegro/ 하위에 runs/, wandb/ 저장
+# study/ 하위에 runs/, wandb/ 저장
 cd "${STUDY_DIR}"
 export WANDB_DIR="${STUDY_DIR}"
 

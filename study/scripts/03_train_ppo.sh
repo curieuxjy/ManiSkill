@@ -2,18 +2,18 @@
 # Allegro Hand PPO 학습 스크립트
 #
 # 사용법:
-#   bash study_allegro/scripts/03_train_ppo.sh [level] [num_envs] [timesteps]
+#   bash study/scripts/03_train_ppo.sh [level] [num_envs] [timesteps]
 #
 # wandb 로깅을 끄려면 WANDB=0 환경변수 설정:
-#   WANDB=0 bash study_allegro/scripts/03_train_ppo.sh 0 512 5000000
+#   WANDB=0 bash study/scripts/03_train_ppo.sh 0 512 5000000
 #
 # 예시:
-#   bash study_allegro/scripts/03_train_ppo.sh 0 512 5000000
-#   bash study_allegro/scripts/03_train_ppo.sh 1 256 10000000
+#   bash study/scripts/03_train_ppo.sh 0 512 5000000
+#   bash study/scripts/03_train_ppo.sh 1 256 10000000
 
 set -e
 
-# 프로젝트 루트와 study_allegro 디렉토리 경로 설정
+# 프로젝트 루트와 study 디렉토리 경로 설정
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 STUDY_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PROJECT_ROOT="$(cd "$STUDY_DIR/.." && pwd)"
@@ -40,7 +40,7 @@ echo "  WandB: ${WANDB_ENABLED}"
 echo "  Output dir: ${STUDY_DIR}/runs/${EXP_NAME}/"
 echo ""
 
-# study_allegro/ 하위에 runs/, wandb/ 저장
+# study/ 하위에 runs/, wandb/ 저장
 cd "${STUDY_DIR}"
 export WANDB_DIR="${STUDY_DIR}"
 

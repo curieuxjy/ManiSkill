@@ -11,7 +11,7 @@ import numpy as np
 import mani_skill.envs
 
 
-def render_video(env_id, output_path="study_allegro/videos/allegro_random.mp4", steps=200):
+def render_video(env_id, output_path="study/videos/allegro_random.mp4", steps=200):
     """랜덤 액션으로 비디오 저장"""
     from mani_skill.utils.wrappers.record import RecordEpisode
 
@@ -21,7 +21,7 @@ def render_video(env_id, output_path="study_allegro/videos/allegro_random.mp4", 
         control_mode="pd_joint_delta_pos",
         render_mode="rgb_array",
     )
-    env = RecordEpisode(env, output_dir="study_allegro/videos", save_trajectory=False)
+    env = RecordEpisode(env, output_dir="study/videos", save_trajectory=False)
 
     obs, _ = env.reset(seed=42)
     for _ in range(steps):
@@ -31,7 +31,7 @@ def render_video(env_id, output_path="study_allegro/videos/allegro_random.mp4", 
             obs, _ = env.reset()
 
     env.close()
-    print(f"Video saved to study_allegro/videos/")
+    print(f"Video saved to study/videos/")
 
 
 def open_viewer(env_id):
